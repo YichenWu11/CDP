@@ -8,3 +8,8 @@ add_executable(${PROJECT_NAME} test.cpp)
 target_link_libraries(${PROJECT_NAME}
     Singleton
 )
+
+target_include_directories(${PROJECT_NAME}
+    PUBLIC
+        ${PROJECT_SOURCE_DIR}/include
+)
