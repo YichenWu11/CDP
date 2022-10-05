@@ -1,4 +1,4 @@
-#include "Singleton.h"
+#include <Singleton.h>
 #include <iostream>
 
 using test_type = std::string;
@@ -23,7 +23,7 @@ public:
         Test::output_line(type);
     }
 private:
-    test_type type = "Single";
+    test_type type = "Singleton";
     int i = 1;
 };
 
