@@ -4,7 +4,26 @@
 ---
 
 # Set up
-该项目使用 cmake 构建，引入到其他项目中的方法可参考 Test 目录下的测试代码
+该项目使用 cmake 构建
+
+```cpp
+#include <CDP/Singleton/Singleton.h>
+```
+
+---
+
+# TEST
+
+```shell
+mkdir build && cd build
+
+cmake ..
+
+cmake --build .
+
+./Test/Test.exe
+
+```
 
 ---
 
