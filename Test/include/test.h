@@ -1,4 +1,4 @@
-#include <Singleton.h>
+#include <CDP/Singleton/Singleton.h>
 #include <iostream>
 
 using namespace Kala;

@@ -1,5 +1,5 @@
 # Set the project name
-project (Singleton)
+project (CDP)
 
 add_library(${PROJECT_NAME} INTERFACE)
 
