@@ -2,21 +2,22 @@
 
 #include <type_traits>
 
-template<typename T>
-class Singleton
+namespace Kala
 {
-protected:
-    Singleton() = default;
-
-public:
-    static T& getInstance() noexcept(std::is_nothrow_constructible<T>::value)
+    template<typename T>
+    class Singleton
     {
-        static T instance;
-        return instance;
-    }
+    protected:
+        Singleton() = default;
 
-    virtual ~Singleton() noexcept = default;
+    public:
+        static T& getInstance() noexcept(std::is_nothrow_constructible<T>::value);
 
-    Singleton(const Singleton&) = delete;
-    Singleton& operator=(const Singleton&) = delete;
-};
+        virtual ~Singleton() noexcept = default;
+
+        Singleton(const Singleton&) = delete;
+        Singleton& operator=(const Singleton&) = delete;
+    };
+}
+
+#include "details/Singleton.inl"
