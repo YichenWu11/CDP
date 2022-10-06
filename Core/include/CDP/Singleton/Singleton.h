@@ -11,7 +11,7 @@ namespace Chen
         Singleton() = default;
 
     public:
-        static T& getInstance() noexcept(std::is_nothrow_constructible<T>::value);
+        static inline T& getInstance() noexcept(std::is_nothrow_constructible<T>::value);
 
         virtual ~Singleton() noexcept = default;
 

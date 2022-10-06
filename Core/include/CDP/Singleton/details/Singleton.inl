@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CDP/Singleton/Singleton.h"
 #include <type_traits>
 
 namespace Chen
