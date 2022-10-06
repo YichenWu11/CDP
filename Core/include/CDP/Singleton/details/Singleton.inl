@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-namespace Kala
+namespace Chen
 {
     template<typename T>
     T& Singleton<T>::getInstance() noexcept(std::is_nothrow_constructible<T>::value)

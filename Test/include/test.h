@@ -1,7 +1,7 @@
 #include <CDP/Singleton/Singleton.h>
 #include <iostream>
 
-using namespace Kala;
+using namespace Chen;
 using test_type = std::string;
 
 class Test;

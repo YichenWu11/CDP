@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-namespace Kala
+namespace Chen
 {
     template<typename T>
     class Singleton
