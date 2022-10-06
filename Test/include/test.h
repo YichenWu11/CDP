@@ -1,5 +1,7 @@
-#include <CDP/Singleton/Singleton.h>
 #include <iostream>
+
+#include <CDP/Singleton/Singleton.h>
+#include <CDP/Visitor/Visitor.h>
 
 using namespace Chen;
 using test_type = std::string;
@@ -40,3 +42,52 @@ private:
 
 // ******************** Singleton ***********************
 
+
+// ******************** Visitor *************************
+
+class IFigure 
+{
+public: 
+    virtual ~IFigure() = default;
+};
+
+class Sphere : public IFigure {};
+
+class Polygon : public IFigure {};
+
+class Drawer : public Visitor<Drawer, IFigure>, public Test
+{
+public:
+    Drawer()
+    {
+        type = "Visitor";
+        Register<Sphere>();
+        Register<Polygon>();
+    }
+
+    void ImplVisit(Sphere*);
+    void ImplVisit(Polygon*);
+
+    virtual void test() override 
+    { 
+        Sphere  s;
+        Polygon p;
+        
+        this->Visit(&s);
+        this->Visit(&p);
+
+        std::cout << std::endl;
+    }
+};
+
+void Drawer::ImplVisit(Sphere*)
+{
+    std::cout << "ImplVisit Sphere*" << std::endl;
+}
+
+void Drawer::ImplVisit(Polygon*)
+{
+    std::cout << "ImplVisit Polygon*" << std::endl;
+}
+
+// ******************** Visitor *************************
