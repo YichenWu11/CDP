@@ -9,6 +9,7 @@
 ```cpp
 #include <CDP/Singleton/Singleton.h>
 #include <CDP/Visitor/Visitor.h>
+#include <CDP/Visitor/General_Visitor.h>
 ```
 
 ---
