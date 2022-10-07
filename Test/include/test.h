@@ -2,12 +2,14 @@
 
 #include <CDP/Singleton/Singleton.h>
 #include <CDP/Visitor/Visitor.h>
+#include <CDP/Visitor/General_Visitor.h>
 
 using namespace Chen;
 using test_type = std::string;
 
 class Test;
 void test(Test &);
+void test(const Test &);
 
 class Test
 {
@@ -49,18 +51,27 @@ class IFigure
 {
 public: 
     virtual ~IFigure() = default;
+    test_type name = "";
 };
 
-class Sphere : public IFigure {};
+class Sphere : public IFigure {
+public: 
+    Sphere() { name = "Sphere"; }
+};
 
-class Polygon : public IFigure {};
+class Polygon : public IFigure {
+public: 
+    Polygon() { name = "Polygon"; }
+};
 
+
+// Drawer
 class Drawer : public Visitor<Drawer, IFigure>, public Test
 {
 public:
     Drawer()
     {
-        type = "Visitor";
+        type = " Visitor ";
         Register<Sphere>();
         Register<Polygon>();
     }
@@ -68,7 +79,7 @@ public:
     void ImplVisit(Sphere*);
     void ImplVisit(Polygon*);
 
-    virtual void test() override 
+    void test() override 
     { 
         Sphere  s;
         Polygon p;
@@ -82,12 +93,85 @@ public:
 
 void Drawer::ImplVisit(Sphere*)
 {
-    std::cout << "ImplVisit Sphere*" << std::endl;
+    std::cout << "Draw Sphere*" << std::endl;
 }
 
 void Drawer::ImplVisit(Polygon*)
 {
-    std::cout << "ImplVisit Polygon*" << std::endl;
+    std::cout << "Draw Polygon*" << std::endl;
 }
+
+
+// Serializer
+class Serializer : public Visitor<Serializer, IFigure>, public Test
+{
+public:
+    Serializer()
+    {
+        type = " Visitor ";
+        Register<Sphere>();
+        Register<Polygon>();
+    }
+
+    void ImplVisit(Sphere*);
+    void ImplVisit(Polygon*);
+
+    void test() override 
+    { 
+        Sphere  s;
+        Polygon p;
+        
+        this->Visit(&s);
+        this->Visit(&p);
+
+        std::cout << std::endl;
+    }
+};
+
+void Serializer::ImplVisit(Sphere*)
+{
+    std::cout << "Serialize Sphere*" << std::endl;
+}
+
+void Serializer::ImplVisit(Polygon*)
+{
+    std::cout << "Serialize Polygon*" << std::endl;
+}
+
+
+// GeneralVisitor
+
+template<typename Func>
+class FigureVisitor;
+
+using DerivedFigures = std::tuple<Sphere, Polygon>;
+
+template<typename R, typename... Args>
+class FigureVisitor<R(Args...)>
+    : public GeneralVisitor<FigureVisitor<R(Args...)>, IFigure, DerivedFigures, R(Args...)>, public Test
+{
+public:
+    virtual R ImplVisit(IFigure *, Args...) { throw std::runtime_error("not implemented"); }
+};
+
+class DrawerFigure : public FigureVisitor<void()> {
+public:
+    DrawerFigure() { type = " Visitor "; }
+
+    void ImplVisit(IFigure *figure) override {
+        std::cout << figure->name << std::endl;
+    }
+    
+    void test() override
+    {
+        Sphere  s;
+        Polygon p;
+        
+        this->Visit(&s);
+        this->Visit(&p);
+
+        std::cout << std::endl;
+    }
+};
 
 // ******************** Visitor *************************

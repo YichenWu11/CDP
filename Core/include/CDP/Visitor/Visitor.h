@@ -32,3 +32,4 @@ namespace Chen
     };
 }
 
+#include "details/Visitor.inl"

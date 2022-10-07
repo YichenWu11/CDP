@@ -8,5 +8,11 @@ int main(int argc, char *argv[])
     Drawer drawer;
     test(drawer);
 
+    Serializer serializer;
+    test(serializer);
+
+    DrawerFigure drawerfigure;
+    test(drawerfigure);
+
     return 0;
 }
