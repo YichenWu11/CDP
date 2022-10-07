@@ -154,12 +154,13 @@ public:
     virtual R ImplVisit(IFigure *, Args...) { throw std::runtime_error("not implemented"); }
 };
 
-class DrawerFigure : public FigureVisitor<void()> {
+class DrawerFigure : public FigureVisitor<int(int)> {
 public:
     DrawerFigure() { type = " Visitor "; }
 
-    void ImplVisit(IFigure *figure) override {
+    int ImplVisit(IFigure *figure, int) override {
         std::cout << figure->name << std::endl;
+        return 1;
     }
     
     void test() override
@@ -167,8 +168,8 @@ public:
         Sphere  s;
         Polygon p;
         
-        this->Visit(&s);
-        this->Visit(&p);
+        this->Visit(&s,1);
+        this->Visit(&p,1);
 
         std::cout << std::endl;
     }

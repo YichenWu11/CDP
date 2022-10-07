@@ -1,5 +1,7 @@
 #pragma once
 
+// 在 Visitor 的基础上允许定制 Visit 的函数原型
+
 #include <functional>
 #include <map>
 #include <tuple>
