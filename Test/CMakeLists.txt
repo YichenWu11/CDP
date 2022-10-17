@@ -6,10 +6,10 @@ project(Test)
 add_executable(${PROJECT_NAME} test.cpp)
 
 target_link_libraries(${PROJECT_NAME}
-    CDP
+    Chen::CDP
 )
 
 target_include_directories(${PROJECT_NAME}
-    PUBLIC
+    PRIVATE
         ${PROJECT_SOURCE_DIR}/include
 )

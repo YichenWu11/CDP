@@ -9,7 +9,6 @@ using test_type = std::string;
 
 class Test;
 void test(Test &);
-void test(const Test &);
 
 class Test
 {
@@ -154,6 +153,7 @@ public:
     virtual R ImplVisit(IFigure *, Args...) { throw std::runtime_error("not implemented"); }
 };
 
+// 定制访问函数签名
 class DrawerFigure : public FigureVisitor<int(int)> {
 public:
     DrawerFigure() { type = " Visitor "; }

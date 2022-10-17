@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
     Serializer serializer;
     test(serializer);
 
-    DrawerFigure drawerfigure;
-    test(drawerfigure);
+    DrawerFigure drawer_figure;
+    test(drawer_figure);
 
     return 0;
 }
